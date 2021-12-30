@@ -1,0 +1,22 @@
+(testareaQuickVm11),[scL]\__testarea,sbt consoleQuick
+(Scala3_Learn),[scL]\scala3,sbt consoleQuick
+(AkkatypedQuick),[scL]\akkatyped,sbt consoleQuick
+(Akkatyped),[scL]\akkatyped,sbt console
+(Cats),[scL]\cats,sbt consoleQuick
+(Catseffect consoleQuick),[scL]\catseffect,sbt consoleQuick
+(Catseffect sbt),[scL]\catseffect,sbt
+(playWithPrimes),[pWP],sbt ~run,-Xms4G -Xmx12G -XX:+HeapDumpOnOutOfMemoryError,-Dfile.encoding=UTF-8
+(httpsclient),[scL]\http4s\httpsclient,sbt consoleQuick
+(-auto-),[scL]\__testarea,sbt consoleQuick
+(-auto-),[scL]\__testarea,scala
+(-auto-),[scL]\__testarea,amm
+(-auto-),[sc]\scalafxAsScript,amm
+(-auto-),[scL]\akka,sbt ~run
+(-auto-),[scL]\akka,sbt consoleQuick
+(-auto-),[scL]\cats,sbt consoleProject#(Compile / fullClasspath).eval.files foreach println
+(-auto-),[scL]\akka,sbt consoleQuick,jdk8
+(-auto-),[scN],sbt consoleQuick
+(-auto-),[alg]\_HKB\_server\wp8\allfiles,sbt consoleQuick
+(-auto-),[scL]\scalaFx,sbt -sbt-version 1.5.4 consoleQuick#:load test1.scala#+close+
+(-auto-),[scL]\zio,sbt consoleQuick
+(Slick),[scL]\slick,sbt console

@@ -1,0 +1,5 @@
+[sc],C:\___jvr_work\___workspaces\____scala
+[scL],C:\___jvr_work\___workspaces\____scala\_____LEARN
+[scN],C:\___jvr_work\___workspaces\____scala\__nativ
+[alg],C:\____Ausgelagert
+[pWP],C:\___jvr_work\___workspaces\____scala\playWithPrimes
