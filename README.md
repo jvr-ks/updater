@@ -117,7 +117,8 @@ The default "[replcommands]"-section of the \[Config-file] looks like:
 
 ```[replcommands]  
 replcommand1=--load the code--  
-replcommand2=--load the codeExec--```  
+replcommand2=--load the codeExec--  
+```  
 
 "replcommand2=" is only needed, if the two code execution sections are used.
  
