@@ -197,9 +197,7 @@ import cats.effect.unsafe.implicits._
 object Main extends IOApp.Simple:  
   val run = IO.println("Hello, World!")   
 end Main  
-```
   
-```
 /** codeExec section  
 Main.run.unsafeRunSync()  
 */   
