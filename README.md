@@ -1,6 +1,7 @@
 # sbt_console_select
 
-##### Description   
+##### Description  
+
 Simple app to start "sbt console" or "sbt consoleQuick" in different directories.  
 [SBT](https://www.scala-sbt.org/) is a [Scala](https://www.scala-lang.org/) build tool,   
 "sbt console" or "sbt consoleQuick" starts the Scala REPL,  
@@ -13,10 +14,12 @@ Can be used to start any programm/app in a selectable directory.
 and the file "project\build.properties" with the SBT version information).  
  
 ##### App status  
+
 * Usable, but work in progress!  
 * Executable is **64bit** now.
 
 ##### Download  
+
 Download from github:  
 [sbt_console_select as ZIP-file](https://github.com/jvr-ks/sbt_console_select/archive/master.zip)  
 or  
@@ -41,11 +44,13 @@ Version (>=)| Change
 \*1) send  to console after "title", example: additionalCommand=chcp 65001
 
 #### Known issues / bugs 
+
 Issue / Bug | Type | fixed in version
 ------------ | ------------- | -------------
 Blanks in entry-names not allowed | issue | 0.167
   
 ##### Usage  
+
 * Start sbt_console_select by a doubleclick onto the file "sbt_console_select.exe".  
 or  
 * drag the "sbt_console_select.exe" to the taskbar.  
@@ -65,7 +70,8 @@ then start with the hotkey.
 
 Click an entry in the list to start the command as defined in "sbt_console_select.txt".  
 
-##### Hotkey operations supplied by the app   
+##### Hotkey operations supplied by the app  
+ 
 [Overview of all default Hotkeys used by my Autohotkey "tools"](https://github.com/jvr-ks/cmdlinedev/blob/master/hotkeys.md)  
    
 (default -> \[Config-file]):  
@@ -80,6 +86,7 @@ or
   
 The code is saved to the temporary file "repl.tmp".  
 Then the "[replcommands]"-section of the \[Config-file] is used, to execute the code, see below.  
+(Using the ":load repl.tmp" REPL-command, so only Scala-code is allowed, not REPL-commands!).  
 
 * replLoadExecHotkey: **\[SHIFT] + \[ALT] + \[e]**  
    
@@ -116,14 +123,15 @@ To inactivate the second execution section mechanism you can:
 * Mark "//" in your code and press the replLoadExecHotkey again,  
 * Remove the content of "replExec.tmp" in your sbt_console_select-directory,  
 * Remove the file "replExec.tmp" in your sbt_console_select-directory,  
-* Press **\[CTRL] + \[r]**, but this cleans the REPL too.    
+* Press **\[CTRL] + \[r]**, but this cleans the REPL too,  
+* take a look at the "codeExec section" below.  
    
 If you need allways a reset before executing, just add it as the first command:  
   
-[replcommands]
-replcommand1=:reset
-replcommand2=--load the code--
-replcommand3=--load the codeExec--
+>[replcommands]
+>replcommand1=:reset
+>replcommand2=--load the code--
+>replcommand3=--load the codeExec--
   
 Comment out any commands with "//".  
 All SBT console commands are usable, i.e. ":load" etc. .  
@@ -132,46 +140,68 @@ The SBT-console is identified by its title with an id created from actual time.
   
 After SBT has finished execution, press the **\[CTRL]**-key to bring the Notepad\++ window to the foreground again.
   
-Remember: SBT-Console depends on "build.sbt" and the files in the "project"-subfolder!     
+Remember: SBT-Console depends on "build.sbt" and the files in the "project"-subfolder!   
+
+Why not using a direct "replcommand1=:load repl.tmp" instead the --load the code-- mechanism?  
+It's because the "repl.tmp"-file is allways in the sbt_console_select-directory!  
+(so you can use the "replcommand1=:load path_to_sbt_console_select-directory\repl.tmp") ...  
+Off course you can load any other file,
+example with "imports.ssc"-file in the running directory:  
+"imports.ssc"-file:
+
+>// imports.ssc
+>
+>import scala.language.postfixOps
+
+
+>[replcommands]  
+>replcommand1=//:reset  
+>replcommand2=:load imports.ssc  
+>replcommand3=--load the code--  
+>replcommand4=--load the codeExec--  
+
 
 \*1) Sends Ctrl + C keys or Ctrl + A, Ctrl + C keys to your editor.
 \*2) Drawback: Code is inserted as a block, you cannot navigate thru each line afterwards.
 
 ###### New: codeExec section  
+
 Add this comment lines to the code to automatically load the "replExec.tmp"-file:  
-/** codeExec section  
-...  
-*/  
+>/** codeExec section  
+>...  
+>*/  
   
 Example 1:  
-/** codeExec section  
-println("Hello ") // codeline 1  
-println("world!") // codeline 2  
-*/  
+>/** codeExec section  
+>println("Hello ") // codeline 1  
+>println("world!") // codeline 2  
+>*/  
   
 Example 2:  
-import cats.effect.{IO, IOApp}  
-import cats.effect.unsafe.implicits._     
+>import cats.effect.{IO, IOApp}  
+>import cats.effect.unsafe.implicits._     
   
-object Main extends IOApp.Simple:  
-  val run = IO.println("Hello, World!")   
-end Main  
+>object Main extends IOApp.Simple:  
+>  val run = IO.println("Hello, World!")   
+>end Main  
   
-/** codeExec section  
-Main.run.unsafeRunSync()  
-*/   
+>/** codeExec section  
+>Main.run.unsafeRunSync()  
+>*/   
   
 Hint:  
 Can be used to inactivate the second execution section mechanism too, just use an empty section:  
-/** codeExec section  
-*/  
+>/** codeExec section  
+>*/  
   
 ##### Setting Java and Scala versions  
+
 Use [Selja](https://github.com/jvr-ks/selja) and [Selsca](https://github.com/jvr-ks/selsca) to set the approbiate versions.  
 Using SBT:   
 Scala-version: SBT uses the definition in the file "build.sbt"  
 
 ##### Remarks
+
 * Do not change the Console-Window if the last command has not started!  
 * Last opened (by sbt_console_select) Console-Window is peferred over other Console-Windows running. 
 * Can be used not only to start sbt but many other tools, starts a %comspec% shell if command-field is emtpy.
@@ -181,11 +211,13 @@ Scala-version: SBT uses the definition in the file "build.sbt"
 
 
 ##### Configure "sbt_console_select":  
+
 * Click on \[Edit] -> \[Edit Command-file], edit the last line ", sbt -sbt-version 1.5.4 consoleQuick,graalvm11_203", replace "graalvm11_203" with your just configured Java/JDK name, save, close editor  
 (-sbt-version 1.5.4 is added because there is not "project/build.properties"-file yet (is created then),  
 the path is not set, so using the actual path of the "sbt_console_select.exe")    
   
 ##### Start REPL
+
 (SBT must be installed!) 
 * Using included files "build.sbt" and "scalafxTest2.sc" which is [based on https://github.com/scalafx/scalafx/blob/master/scalafx-demos/src/main/scala/scalafx/ColorfulCircles.scala](https://github.com/scalafx/scalafx/blob/master/scalafx-demos/src/main/scala/scalafx/ColorfulCircles.scala)
 * Type \[Alt] + \[t] to reopen sbt_console_select
@@ -195,7 +227,8 @@ the path is not set, so using the actual path of the "sbt_console_select.exe")
 * After closing the demo, type \[Shift] + \[Alt] + \[t] to close the REPL (sends \[Ctrl] + \[D] and "exit")
 * For ScalaFX us \[Ctrl] + \[D] then \[Arrow Up] then ":load scalafxTest2.sc" to restart
 
-##### Executable
+##### Executable  
+
 * "sbt_console_select.exe"  
 * "sbt_console_select.exe" \[Command-file] \[Config-file] \[hidewindow] \[remove]   
  
@@ -203,7 +236,8 @@ the path is not set, so using the actual path of the "sbt_console_select.exe")
 \[hidewindow] = the word "hidewindow" 
 \[remove] = the word "remove" , remove app from memory (to compile a new one)  
 
-##### Configuration
+##### Configuration  
+
 * \[Config-file], default is "sbt_console_select.ini",  
 contains name=value pairs,  
 divided by different \[sections].
@@ -217,7 +251,8 @@ Only simple Hotkey modifications are reflected in the menu.
 (Parsing is limited to \[CTRL], \[ALT], \[WIN], \[SHIFT]).  
   
   
-##### Startparameter / Autostart
+##### Startparameter / Autostart  
+
 Startparameter |  action
 ------------ | ------------- 
 hidewindow | start app in the background  
@@ -226,18 +261,22 @@ Config-file | must have extension ".ini"
 Command-file | must have extension ".txt"
 remove | removes app from memory
   
-##### Sourcecode: [Autohotkey format](https://www.autohotkey.com)
+##### Sourcecode: [Autohotkey format](https://www.autohotkey.com)  
+
 * "sbt_console_select.ahk".  
   
-##### Requirements
+##### Requirements  
+
 * Windows 10 or later only.  
 * Installed [SBT](https://www.scala-sbt.org/)  
 * Portable app, nothing to install. 
   
-##### Sourcecode
+##### Sourcecode  
+
 Github URL [github](https://github.com/jvr-ks/sbt_console_select).  
 
-##### License: MIT
+##### License: MIT  
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sub-license, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -248,6 +287,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1640879690
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1640973256
 )  
 Use [CTRL] + Click to open in a new window! 
