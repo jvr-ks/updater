@@ -156,9 +156,9 @@ example with "imports.ssc"-file in the running directory:
 "imports.ssc"-file:
   
 ```
->// imports.ssc
->
->import scala.language.postfixOps
+// imports.ssc
+
+import scala.language.postfixOps
 ```
   
 ```
@@ -190,12 +190,14 @@ println("world!") // codeline 2
 ```
   
 Example 2:  
+``` 
 import cats.effect.{IO, IOApp}  
 import cats.effect.unsafe.implicits._     
   
->object Main extends IOApp.Simple:  
->  val run = IO.println("Hello, World!")   
->end Main  
+object Main extends IOApp.Simple:  
+  val run = IO.println("Hello, World!")   
+end Main  
+```
   
 ```
 /** codeExec section  
