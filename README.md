@@ -164,7 +164,7 @@ example with "imports.ssc"-file in the running directory:
 \*1) Sends Ctrl + C keys or Ctrl + A, Ctrl + C keys to your editor.
 \*2) Drawback: Code is inserted as a block, you cannot navigate thru each line afterwards.
 
-###### New: codeExec section  
+##### New: codeExec section  
 
 Add this comment lines to the code to automatically load the "replExec.tmp"-file:  
 >/** codeExec section  
