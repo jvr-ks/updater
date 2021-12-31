@@ -101,9 +101,9 @@ replcommand2=
 which are executed from top to down, i.e. 1,2,3 ...  
   
 There are 2 "dummy" commands defined internally:  
---load the code--  
+>--load the code--  
 and  
---load the codeExec--  
+>--load the codeExec--  
   
 If "replcommandN=--load the code--" is reached,  
 the content of the file "repl.tmp" is executed.  
@@ -113,11 +113,11 @@ the content of the file "replExec.tmp" is executed.
  
 The default "[replcommands]"-section of the \[Config-file] looks like:  
 
-[replcommands]
-replcommand1=--load the code--
-replcommand2=--load the codeExec--
+>[replcommands]  
+>replcommand1=--load the code--  
+>replcommand2=--load the codeExec--  
 
-replcommand2= is only needed, if the two code execution sections ared used.
+"replcommand2=" is only needed, if the two code execution sections are used.
  
 To inactivate the second execution section mechanism you can:  
 * Mark "//" in your code and press the replLoadExecHotkey again,  
