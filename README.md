@@ -115,7 +115,8 @@ the content of the file "replExec.tmp" is executed.
  
 The default "[replcommands]"-section of the \[Config-file] looks like:  
 
-```[replcommands]  
+```
+[replcommands]  
 replcommand1=--load the code--  
 replcommand2=--load the codeExec--  
 ```  
@@ -131,11 +132,13 @@ To inactivate the second execution section mechanism you can:
    
 If you allways need a reset before executing, just add it as the first command:  
   
->[replcommands]  
->replcommand1=:reset  
->replcommand2=--load the code--  
->replcommand3=--load the codeExec--  
-  
+```
+[replcommands]  
+replcommand1=:reset  
+replcommand2=--load the code--  
+replcommand3=--load the codeExec--  
+```
+
 Comment out any commands with "//".  
 All SBT console commands are usable, i.e. ":load" etc. .  
   
@@ -151,18 +154,20 @@ It's because the "repl.tmp"-file is allways in the sbt_console_select-directory!
 Off course you can load any other file,
 example with "imports.ssc"-file in the running directory:  
 "imports.ssc"-file:
-
+  
+```
 >// imports.ssc
 >
 >import scala.language.postfixOps
-
-
->[replcommands]  
->replcommand1=//:reset  
->replcommand2=:load imports.ssc  
->replcommand3=--load the code--  
->replcommand4=--load the codeExec--  
-
+```
+  
+```
+[replcommands]  
+replcommand1=//:reset  
+replcommand2=:load imports.ssc  
+replcommand3=--load the code--  
+replcommand4=--load the codeExec--  
+```
 
 \*1) Sends Ctrl + C keys or Ctrl + A, Ctrl + C keys to your editor.
 \*2) Drawback: Code is inserted as a block, you cannot navigate thru each line afterwards.
@@ -170,33 +175,41 @@ example with "imports.ssc"-file in the running directory:
 ##### New: codeExec section  
 
 Add this comment lines to the code to automatically load the "replExec.tmp"-file:  
->/** codeExec section  
->...  
->*/  
-  
+```
+/** codeExec section  
+...  
+*/  
+```
+ 
 Example 1:  
->/** codeExec section  
->println("Hello ") // codeline 1  
->println("world!") // codeline 2  
->*/  
+```
+/** codeExec section  
+println("Hello ") // codeline 1  
+println("world!") // codeline 2  
+*/  
+```
   
 Example 2:  
->import cats.effect.{IO, IOApp}  
->import cats.effect.unsafe.implicits._     
+import cats.effect.{IO, IOApp}  
+import cats.effect.unsafe.implicits._     
   
 >object Main extends IOApp.Simple:  
 >  val run = IO.println("Hello, World!")   
 >end Main  
   
->/** codeExec section  
->Main.run.unsafeRunSync()  
->*/   
+```
+/** codeExec section  
+Main.run.unsafeRunSync()  
+*/   
+```
   
 Hint:  
 Can be used to inactivate the second execution section mechanism too, just use an empty section:  
->/** codeExec section  
->*/  
-  
+```
+/** codeExec section  
+*/  
+```
+   
 ##### Setting Java and Scala versions  
 
 Use [Selja](https://github.com/jvr-ks/selja) and [Selsca](https://github.com/jvr-ks/selsca) to set the approbiate versions.  
