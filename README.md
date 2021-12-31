@@ -102,7 +102,9 @@ which are executed from top to down, i.e. 1,2,3 ...
   
 There are 2 "dummy" commands defined internally:  
 >--load the code--  
+
 and  
+
 >--load the codeExec--  
   
 If "replcommandN=--load the code--" is reached,  
@@ -113,9 +115,9 @@ the content of the file "replExec.tmp" is executed.
  
 The default "[replcommands]"-section of the \[Config-file] looks like:  
 
->[replcommands]  
->replcommand1=--load the code--  
->replcommand2=--load the codeExec--  
+```[replcommands]  
+replcommand1=--load the code--  
+replcommand2=--load the codeExec--```  
 
 "replcommand2=" is only needed, if the two code execution sections are used.
  
@@ -287,6 +289,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1640973256
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1640974279
 )  
 Use [CTRL] + Click to open in a new window! 
