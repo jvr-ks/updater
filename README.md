@@ -126,12 +126,12 @@ To inactivate the second execution section mechanism you can:
 * Press **\[CTRL] + \[r]**, but this cleans the REPL too,  
 * take a look at the "codeExec section" below.  
    
-If you need allways a reset before executing, just add it as the first command:  
+If you allways need a reset before executing, just add it as the first command:  
   
->[replcommands]
->replcommand1=:reset
->replcommand2=--load the code--
->replcommand3=--load the codeExec--
+>[replcommands]  
+>replcommand1=:reset  
+>replcommand2=--load the code--  
+>replcommand3=--load the codeExec--  
   
 Comment out any commands with "//".  
 All SBT console commands are usable, i.e. ":load" etc. .  
