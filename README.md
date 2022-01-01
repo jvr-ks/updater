@@ -34,7 +34,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
-0.175 | importsLoaded mechanism: --load imports.ssc--
+0.175 | Imports mechanism: --load imports--
 0.174 | commented out replcommands are allways hidden
 0.173 | codeExec section to include the two parts in one source-file, commented out replcommands are allways shown as comments
 0.172 | \[Config-file] ->  additionalCommand \*1)
@@ -179,7 +179,7 @@ Press the replResetHotkey to load it again on next run.
 * replResetHotkey: **\[CTRL] + \[r]**  
 Executes a ":reset" REPL-command, deletes the "replExec.tmp"-file and resets "importsLoaded".
 
-##### Imports command
+##### Imports mechanism
 
 It is annoying to repeatedly load the imports (using ":load imports.ssc").  
 Instead use "replcommandN=--load imports--" to run ":load imports.ssc" only once!  
