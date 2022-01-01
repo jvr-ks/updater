@@ -53,7 +53,7 @@ msgDefault := ""
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.177"
+appVersion := "0.178"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -97,6 +97,8 @@ filemanagerPathDefault := "%SystemRoot%\explorer.exe"
 ; overwritten by ini-file
 emailpath := emailPathDefault
 filemanagerpath := filemanagerPathDefault
+
+importsLoaded := false
 
 ;------------------------------------ WSL ------------------------------------
 WSL := "C:\Windows\System32\wsl.exe"
@@ -438,6 +440,7 @@ replLoadAction(selectAll := false){
   global lastOpendTitle
   global replFile
   global replExecFile
+  global importsLoaded
   
   toSend := ""
   
@@ -485,8 +488,9 @@ replLoadAction(selectAll := false){
           
           specialCommand := false
           
-          isLoad := RegExMatch(toSend, "i)--load the code--")
           comment := isComment(toSend)
+          
+          isLoad := RegExMatch(toSend, "i)--load the code--")
           
           if (isLoad && !comment){
             if (FileExist(replFile)){
@@ -510,6 +514,18 @@ replLoadAction(selectAll := false){
             }
             specialCommand := true
           }
+                   
+          isLoadExec := RegExMatch(toSend, "i)--load imports--")
+          
+          if (isLoadExec && !comment){
+            if (!importsLoaded){
+              SendInput,{text}:load imports.ssc
+              SendInput,{Enter}
+              importsLoaded := true
+            }
+            specialCommand := true
+          } 
+          
           
           if (!specialCommand && !comment){
             SendInput,{text}%toSend%
@@ -562,6 +578,9 @@ replSelectLoadExec(){
 replReset(){
   global lastOpendTitle
   global replExecFile
+  global importsLoaded
+  
+  importsLoaded := false
   
   SetTitleMatchMode, 2
   winFound := false

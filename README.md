@@ -34,6 +34,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
+0.175 | importsLoaded mechanism: --load imports.ssc--
 0.174 | commented out replcommands are allways hidden
 0.173 | codeExec section to include the two parts in one source-file, commented out replcommands are allways shown as comments
 0.172 | \[Config-file] ->  additionalCommand \*1)
@@ -169,10 +170,22 @@ replcommand3=--load the code--
 replcommand4=--load the codeExec--  
 ```
 
+There is a special hardcoded feature to only load "imports.ssc" once!  
+Press the replResetHotkey to load it again on next run.  
+
 \*1) Sends Ctrl + C keys or Ctrl + A, Ctrl + C keys to your editor.
 \*2) Drawback: Code is inserted as a block, you cannot navigate thru each line afterwards.
 
-##### New: codeExec section  
+* replResetHotkey: **\[CTRL] + \[r]**  
+Executes a ":reset" REPL-command, deletes the "replExec.tmp"-file and resets "importsLoaded".
+
+##### Imports command
+
+It is annoying to repeatedly load the imports (using ":load imports.ssc").  
+Instead use "replcommandN=--load imports--" to run ":load imports.ssc" only once!  
+(at first start and after pressing replResetHotkey, the Name "imports.ssc" is hardcoded).  
+   
+##### codeExec section  
 
 Add this comment lines to the code to automatically load the "replExec.tmp"-file:  
 ```
@@ -303,6 +316,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1640975949
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1641044144
 )  
 Use [CTRL] + Click to open in a new window! 
