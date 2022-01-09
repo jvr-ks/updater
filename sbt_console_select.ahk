@@ -53,7 +53,7 @@ msgDefault := ""
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.178"
+appVersion := "0.179"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -446,7 +446,7 @@ replLoadAction(selectAll := false){
   
   if (selectAll){
     Send {Ctrl down}a{Ctrl up}
-    sleep,200
+    sleep,1000
   }
 
   Send {Ctrl down}c{Ctrl up}

@@ -20,3 +20,4 @@
 (-auto-),[scL]\scalaFx,sbt -sbt-version 1.5.4 consoleQuick#:load test1.scala#+close+
 (-auto-),[scL]\zio,sbt consoleQuick
 (Slick),[scL]\slick,sbt console
+(Scala3_creativescala),[scL]\creativescala,sbt consoleQuick

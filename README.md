@@ -48,8 +48,11 @@ Version (>=)| Change
 
 Issue / Bug | Type | fixed in version
 ------------ | ------------- | -------------
-Blanks in entry-names not allowed | issue | 0.167
+Ctrl + E copies old contents | bug | 0.179 \*1)  
+Blanks in entry-names not allowed | issue | 0.167  
   
+\*1) A timing problem of the windows-clipboard (CPU-speed dependent), increased delay to 1000 ms.  
+    
 ##### Usage  
 
 * Start sbt_console_select by a doubleclick onto the file "sbt_console_select.exe".  
@@ -316,6 +319,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1641044144
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1641734775
 )  
 Use [CTRL] + Click to open in a new window! 
