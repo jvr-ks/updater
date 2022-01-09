@@ -446,10 +446,11 @@ replLoadAction(selectAll := false){
   
   if (selectAll){
     Send {Ctrl down}a{Ctrl up}
-    sleep,1000
   }
 
   Send {Ctrl down}c{Ctrl up}
+  
+  sleep,1000
   
   if (clipboard != ""){
     code := clipboard

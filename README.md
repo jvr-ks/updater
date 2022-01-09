@@ -48,10 +48,10 @@ Version (>=)| Change
 
 Issue / Bug | Type | fixed in version
 ------------ | ------------- | -------------
-Ctrl + E copies old contents | bug | 0.179 \*1)  
+Ctrl + E copies old contents | bug | 0.179 
 Blanks in entry-names not allowed | issue | 0.167  
   
-\*1) A timing problem of the windows-clipboard (CPU-speed dependent), increased delay to 1000 ms.  
+ 
     
 ##### Usage  
 
