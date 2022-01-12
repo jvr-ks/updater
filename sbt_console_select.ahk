@@ -535,9 +535,8 @@ replLoadAction(selectAll := false){
         }
         tipWindow("Press [CTRL]-key to cycle to next Fastswitch Auto cycle entry!")
         
-        KeyWait,Control,D,T10
+        KeyWait,Control,D
         tipWindowClose()
-        ; winActivate,ahk_exe notepad++.exe
 
         if !ErrorLevel
         {
