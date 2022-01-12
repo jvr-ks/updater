@@ -34,7 +34,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
-0.176 | Special operation of the left \[Ctrl]-key changed, see below ...   
+0.180 | Special operation of the left \[Ctrl]-key changed, see below ...   
 0.175 | Imports mechanism: --load imports--
 0.174 | commented out replcommands are allways hidden
 0.173 | codeExec section to include the two parts in one source-file, commented out replcommands are allways shown as comments
@@ -95,7 +95,7 @@ Then the "[replcommands]"-section of the \[Config-file] is used, to execute the 
 
 ##### Special operation of the left \[Ctrl]-key after replLoadHotkey was executed:  
 Pressing the left \[Ctrl]-key activates the notepad++ window.  
-In version 0.176+ left \[Ctrl]-key operates in conjunction with "cmdlinedev" only.  
+In version 0.180+ left \[Ctrl]-key operates in conjunction with "cmdlinedev" only.  
 It activates the **\[ALT] + \[q]** hotkey, which cycles to the next "Fastswitch Auto cycle" entry.
 
 
