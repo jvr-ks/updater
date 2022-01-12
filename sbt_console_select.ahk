@@ -53,7 +53,7 @@ msgDefault := ""
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.179"
+appVersion := "0.180"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -533,12 +533,18 @@ replLoadAction(selectAll := false){
             SendInput,{Enter}
           }
         }
-        tipWindow("Press [CTRL]-key to return to Notepad2!")
+        tipWindow("Press [CTRL]-key to cycle to next Fastswitch Auto cycle entry!")
         
-        KeyWait,Control,D
+        KeyWait,Control,D,T10
         tipWindowClose()
-        winActivate,ahk_exe notepad++.exe
-      
+        ; winActivate,ahk_exe notepad++.exe
+
+        if !ErrorLevel
+        {
+          SendLevel, 1
+          send,!{q}
+        }
+
       } else {    
         msgbox, No suitable Console-Window found!
       }    

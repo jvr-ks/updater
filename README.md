@@ -34,6 +34,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
+0.176 | Special operation of the left \[Ctrl]-key changed, see below ...   
 0.175 | Imports mechanism: --load imports--
 0.174 | commented out replcommands are allways hidden
 0.173 | codeExec section to include the two parts in one source-file, commented out replcommands are allways shown as comments
@@ -91,6 +92,12 @@ or
 The code is saved to the temporary file "repl.tmp".  
 Then the "[replcommands]"-section of the \[Config-file] is used, to execute the code, see below.  
 (Using the ":load repl.tmp" REPL-command, so only Scala-code is allowed, not REPL-commands!).  
+
+##### Special operation of the left \[Ctrl]-key after replLoadHotkey was executed:  
+Pressing the left \[Ctrl]-key activates the notepad++ window.  
+In version 0.176+ left \[Ctrl]-key operates in conjunction with "cmdlinedev" only.  
+It activates the **\[ALT] + \[q]** hotkey, which cycles to the next "Fastswitch Auto cycle" entry.
+
 
 * replLoadExecHotkey: **\[SHIFT] + \[ALT] + \[e]**  
    
@@ -319,6 +326,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1641734775
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1642018656
 )  
 Use [CTRL] + Click to open in a new window! 
