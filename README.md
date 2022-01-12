@@ -183,20 +183,20 @@ replcommand4=--load the codeExec--
 There is a special hardcoded feature to only load "imports.ssc" once!  
 Press the replResetHotkey to load it again on next run.  
 
-\*1) Sends Ctrl + C keys or Ctrl + A, Ctrl + C keys to your editor.
-\*2) Drawback: Code is inserted as a block, you cannot navigate thru each line afterwards.
-
+\*1) Sends Ctrl + C keys or Ctrl + A, Ctrl + C keys to your editor.  
+\*2) Drawback: Code is inserted as a block, you cannot navigate thru each line afterwards.  
+  
 * replResetHotkey: **\[CTRL] + \[r]**  
-Executes a ":reset" REPL-command, deletes the "replExec.tmp"-file and resets "importsLoaded".
-
-##### Imports mechanism
-
+Executes a ":reset" REPL-command, deletes the "replExec.tmp"-file and resets "importsLoaded".  
+  
+##### Imports mechanism  
+  
 It is annoying to repeatedly load the imports (using ":load imports.ssc").  
 Instead use "replcommandN=--load imports--" to run ":load imports.ssc" only once!  
 (at first start and after pressing replResetHotkey, the Name "imports.ssc" is hardcoded).  
    
 ##### codeExec section  
-
+  
 Add this comment lines to the code to automatically load the "replExec.tmp"-file:  
 ```
 /** codeExec section  
