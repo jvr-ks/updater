@@ -74,7 +74,6 @@ CoordMode, Mouse, Screen
 nomenu := false
 
 lastOpendTitle := "???"
-previouslyOpenWindow := ""
 
 holdtimeDefault := 3000 ; milliseconds
 holdtime := holdtimeDefault
@@ -442,10 +441,10 @@ replLoadAction(selectAll := false){
   global replFile
   global replExecFile
   global importsLoaded
-  global previouslyOpenWindow
   
   toSend := ""
-  WinGet,previouslyOpenWindow,ID,A
+
+  isWin := WinActive("A")
   
   if (selectAll){
     Send {Ctrl down}a{Ctrl up}
@@ -543,7 +542,7 @@ replLoadAction(selectAll := false){
 
         if !ErrorLevel
         {
-          winActivate,ahk_id %previouslyOpenWindow%
+          winActivate,ahk_id %isWin%
         }
 
       } else {    
@@ -612,9 +611,10 @@ replReset(){
     if (FileExist(replExecFile))
       FileDelete, %replExecFile%
       
-    tipWindow("Press [CTRL]-key to return to previous window!")
-    KeyWait,Control,D
-    tipWindowClose()
+    ; tipWindow("Press [CTRL]-key to return to previous window!")
+    ; KeyWait,Control,D
+    ; tipWindowClose()
+    sleep,500
     winActivate,ahk_id %isWin%
   } else {
     tipWindow("No approbiate console-window found!",0,3000)
