@@ -53,7 +53,7 @@ msgDefault := ""
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.181"
+appVersion := "0.180"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
