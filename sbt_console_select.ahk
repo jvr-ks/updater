@@ -53,7 +53,7 @@ msgDefault := ""
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.180"
+appVersion := "0.181"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -533,7 +533,7 @@ replLoadAction(selectAll := false){
             SendInput,{Enter}
           }
         }
-        tipWindow("Press [CTRL]-key to cycle to next Fastswitch Auto cycle entry!")
+        tipWindow("Press [CTRL]-key to cycle to the previous Fastswitch Auto cycle entry!")
         
         KeyWait,Control,D
         tipWindowClose()
@@ -541,7 +541,7 @@ replLoadAction(selectAll := false){
         if !ErrorLevel
         {
           SendLevel, 1
-          send,!{q}
+          send,+!{q}
         }
 
       } else {    
