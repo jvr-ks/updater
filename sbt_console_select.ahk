@@ -53,7 +53,7 @@ msgDefault := ""
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.180"
+appVersion := "0.181"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -74,6 +74,7 @@ CoordMode, Mouse, Screen
 nomenu := false
 
 lastOpendTitle := "???"
+previouslyOpenWindow := ""
 
 holdtimeDefault := 3000 ; milliseconds
 holdtime := holdtimeDefault
@@ -441,8 +442,10 @@ replLoadAction(selectAll := false){
   global replFile
   global replExecFile
   global importsLoaded
+  global previouslyOpenWindow
   
   toSend := ""
+  WinGet,previouslyOpenWindow,ID,A
   
   if (selectAll){
     Send {Ctrl down}a{Ctrl up}
@@ -533,15 +536,14 @@ replLoadAction(selectAll := false){
             SendInput,{Enter}
           }
         }
-        tipWindow("Press [CTRL]-key to cycle to the previous Fastswitch Auto cycle entry!")
+        tipWindow("Press [CTRL]-key to return to the previously open window!")
         
         KeyWait,Control,D
         tipWindowClose()
 
         if !ErrorLevel
         {
-          SendLevel, 1
-          send,+!{q}
+          winActivate,ahk_id %previouslyOpenWindow%
         }
 
       } else {    
