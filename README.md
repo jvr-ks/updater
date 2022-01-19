@@ -21,7 +21,9 @@ and the file "project\build.properties" with the SBT version information).
 ##### Download  
 
 Download from github:  
-[sbt_console_select as ZIP-file](https://github.com/jvr-ks/sbt_console_select/archive/master.zip)  
+[sbt_console_select as ZIP-file](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.zip)  
+
+
 or  
 [sbt_console_select.exe](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.exe)   
 [sbt_console_select.ini](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.ini)   
@@ -324,6 +326,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1642428953
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1642627475
 )  
 Use [CTRL] + Click to open in a new window! 
