@@ -50,10 +50,11 @@
 #Include, Lib\WinGetPosEx.ahk
 
 msgDefault := ""
+DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.181"
+appVersion := "0.182"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -98,6 +99,7 @@ filemanagerPathDefault := "%SystemRoot%\explorer.exe"
 emailpath := emailPathDefault
 filemanagerpath := filemanagerPathDefault
 
+useImportsFile := false
 importsLoaded := false
 
 ;------------------------------------ WSL ------------------------------------
@@ -163,7 +165,7 @@ Loop % A_Args.Length()
   
   FoundPos := RegExMatch(A_Args[A_index],"\([\s\w]+?\)", autoSelectName)
   If (FoundPos > 0)
-    showHint("Selected: " . autoSelectName, 3000)
+    showHint(app . " selected entry: " . autoSelectName, 3000)
 }
 
 cmdFile := resolvepath(wrkDir,cmdFile)
@@ -273,9 +275,9 @@ mainWindow(hide := false) {
     n := entryNameArr[autoselectName]
     if(n > 0)
       runInDir(n)
+    else
+      msgbox, Entry not found: %autoselectName%
   }
-  OnMessage(0x200, "WM_MOUSEMOVE")
-  OnMessage(0x2a3, "WM_MOUSELEAVE")
 
   return
 }
@@ -370,6 +372,7 @@ readIni(){
   global replcommandsArr
   
   global additionalCommand
+  global useImportsFile
   
 
 ; read Hotkey definition
@@ -398,6 +401,9 @@ readIni(){
   IniRead, fontsize, %configFile%, config, fontsize, %fontsizeDefault%
   
   IniRead, additionalCommand, %configFile%, config, additionalCommand, %A_Space%
+  
+  IniRead, useImportsFile, %configFile%, config, useimportsfile,no
+  
   
   
   blank := "-"
@@ -441,6 +447,7 @@ replLoadAction(selectAll := false){
   global replFile
   global replExecFile
   global importsLoaded
+  global useImportsFile
   
   toSend := ""
 
@@ -522,13 +529,14 @@ replLoadAction(selectAll := false){
           
           if (isLoadExec && !comment){
             if (!importsLoaded){
-              SendInput,{text}:load imports.ssc
-              SendInput,{Enter}
-              importsLoaded := true
+              if (useImportsFile){
+                SendInput,{text}:load imports.ssc
+                SendInput,{Enter}
+                importsLoaded := true
+              }
             }
             specialCommand := true
           } 
-          
           
           if (!specialCommand && !comment){
             SendInput,{text}%toSend%
@@ -803,7 +811,8 @@ runInDir(lineNumber){
   global replSelectLastDirUsed
   global autoselectName
   global additionalCommand
-
+  global app
+     
   if (entryIndexArr[lineNumber] != "")
     id := entryIndexArr[lineNumber]
     
@@ -904,10 +913,13 @@ runInDir(lineNumber){
     case 2:
       ;*** Shift = edit built.sbt ***
       
-      f := d . "\build.sbt"
-      runWait,%f%,%d%,max
+        WinGetActiveTitle, activeTitle
+        if (activeTitle == app){
+          f := d . "\build.sbt"
+          runWait,%f%,%d%,max
   
-      showWindowRefreshed()
+          showWindowRefreshed()
+       }
 
     case 4:
       ; Capslock

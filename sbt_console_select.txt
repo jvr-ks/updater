@@ -1,4 +1,4 @@
-(testareaQuickVm11),[scL]\__testarea,sbt consoleQuick
+(testareaQuick),[scL]\__testarea,sbt consoleQuick
 (Scala3_Learn),[scL]\scala3,sbt consoleQuick
 (AkkatypedQuick),[scL]\akkatyped,sbt consoleQuick
 (Akkatyped),[scL]\akkatyped,sbt console
