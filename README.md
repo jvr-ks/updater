@@ -36,6 +36,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
+0.183 | Use imports.scc CheckBox
 0.181 | Special operation of the left \[Ctrl]-key changed, returns to the previously open window  
 0.180 | Special operation of the left \[Ctrl]-key changed, see below ...   
 0.175 | Imports mechanism: --load imports--
