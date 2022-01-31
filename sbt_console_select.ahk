@@ -54,7 +54,7 @@ DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.182"
+appVersion := "0.183"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -220,6 +220,7 @@ mainWindow(hide := false) {
   global listWidthDefault
   global msgDefault
   global autoselectName
+  global useImportsFile
   
   Menu, Tray, UseErrorLevel   ; This affects all menus, not just the tray.
   
@@ -242,8 +243,12 @@ mainWindow(hide := false) {
 
   xStart := 5
   yStart := 5
+  
+  chk := useImportsFile ? "checked" : ""
+  Gui, guiMain:Add, CheckBox, x%xStart% y%yStart% VuseImportsFile gsaveUseImportsFile %chk%, Use imports.scc
+  
   linesInList := directoriesArr.length()
-  Gui, Add, ListView, x%xStart% y%yStart% r%linesInList% w%listWidthDefault% gLVCommands vLV1 Grid AltSubmit -Multi, |Name|Directory|Command
+  Gui, Add, ListView, x%xStart% r%linesInList% w%listWidthDefault% gLVCommands vLV1 Grid AltSubmit -Multi, |Name|Directory|Command
 
   Loop % directoriesArr.length()  
   {
@@ -279,6 +284,18 @@ mainWindow(hide := false) {
       msgbox, Entry not found: %autoselectName%
   }
 
+  return
+}
+
+;---------------------------- saveUseImportsFile ----------------------------
+saveUseImportsFile(){
+  global configFile
+  global useImportsFile
+  
+  Gui, guiMain:submit, NoHide
+
+  IniWrite, %useImportsFile%, %configFile%, config, useImportsFile
+  
   return
 }
 
@@ -403,8 +420,6 @@ readIni(){
   IniRead, additionalCommand, %configFile%, config, additionalCommand, %A_Space%
   
   IniRead, useImportsFile, %configFile%, config, useimportsfile,no
-  
-  
   
   blank := "-"
   replcommandsArr := []
