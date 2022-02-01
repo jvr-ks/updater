@@ -173,9 +173,10 @@ Loop % A_Args.Length()
   
   FoundPos := RegExMatch(A_Args[A_index],"\([\s\w]+?\)", found)
   
-  If (FoundPos > 0)
+  If (FoundPos > 0){
     autoSelectName := found
     showHint(app . " selected entry: " . autoSelectName, 3000)
+  }
 }
 
 cmdFile := resolvepath(wrkDir,cmdFile)
