@@ -36,10 +36,11 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
+0.183 | Start-parameter "imports"
 0.183 | "Use imports.scc" CheckBox
 0.181 | Special operation of the left \[Ctrl]-key changed, returns to the previously open window  
 0.180 | Special operation of the left \[Ctrl]-key changed, see below ...   
-0.175 | Imports mechanism: --load imports--
+0.175 | Imports mechanism: uses "--load imports--" 
 0.174 | commented out replcommands are allways hidden
 0.173 | codeExec section to include the two parts in one source-file, commented out replcommands are allways shown as comments
 0.172 | \[Config-file] ->  additionalCommand \*1)
@@ -195,6 +196,9 @@ Executes a ":reset" REPL-command, deletes the "replExec.tmp"-file and resets "im
 It is annoying to repeatedly load the imports (using ":load imports.ssc").  
 Instead use "replcommandN=--load imports--" to run ":load imports.ssc" only once!  
 (at first start and after pressing replResetHotkey, the Name "imports.ssc" is hardcoded).  
+There is a checkbox to enable/disable the imports mechanism.  
+The start-parameter "imports / noimports" activates / deactivates the imports mechanism for this session, 
+regardless of the checkbox status.  
    
 ##### codeExec section  
   
@@ -327,6 +331,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1643660429
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1643722575
 )  
 Use [CTRL] + Click to open in a new window! 

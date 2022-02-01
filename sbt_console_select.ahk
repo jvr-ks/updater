@@ -54,7 +54,7 @@ DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.183"
+appVersion := "0.184"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -159,12 +159,22 @@ Loop % A_Args.Length()
   if(eq(SubStr(A_Args[A_index],-3,4),".txt"))
     cmdFile := A_Args[A_index]
     
-  if(eq(A_Args[A_index],"hidewindow")){
-    hideOnStartup := true
+  if(eq(A_Args[A_index],"imports")){
+    useImportsFile := true
   }
   
-  FoundPos := RegExMatch(A_Args[A_index],"\([\s\w]+?\)", autoSelectName)
+  if(eq(A_Args[A_index],"noimports")){
+    useImportsFile := false
+  }
+  
+  if(eq(A_Args[A_index],"hidewindow")){
+    hidewindow := true
+  }
+  
+  FoundPos := RegExMatch(A_Args[A_index],"\([\s\w]+?\)", found)
+  
   If (FoundPos > 0)
+    autoSelectName := found
     showHint(app . " selected entry: " . autoSelectName, 3000)
 }
 
@@ -276,12 +286,13 @@ mainWindow(hide := false) {
   }
 
   if (autoselectName != ""){
-    hideWindow()
     n := entryNameArr[autoselectName]
-    if(n > 0)
+    if(n > 0){
+      hideWindow()
       runInDir(n)
-    else
+    } else {
       msgbox, Entry not found: %autoselectName%
+    }
   }
 
   return
@@ -291,10 +302,14 @@ mainWindow(hide := false) {
 saveUseImportsFile(){
   global configFile
   global useImportsFile
+  global importsLoaded
   
   Gui, guiMain:submit, NoHide
 
   IniWrite, %useImportsFile%, %configFile%, config, useImportsFile
+  
+  if (useImportsFile)
+    importsLoaded := false
   
   return
 }
