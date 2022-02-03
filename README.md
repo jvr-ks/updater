@@ -36,6 +36,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
+0.185 | WSL Support: activate Capslock (autom. deactivated) to use WSL (additionalCommand not used)
 0.183 | Start-parameter "imports"
 0.183 | "Use imports.scc" CheckBox
 0.181 | Special operation of the left \[Ctrl]-key changed, returns to the previously open window  
@@ -331,6 +332,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1643725221
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1643912311
 )  
 Use [CTRL] + Click to open in a new window! 
