@@ -400,11 +400,11 @@ getKeyboardState(){
 }
 
 ;-------------------------------- showMessage --------------------------------
-showMessage(hk1, hk2){
+showMessage(hk1, hk2, part1 = 160, part2 = 580){
   global menuHotkey
   global exitHotkey
 
-  SB_SetParts(160,580)
+  SB_SetParts(part1,part2)
   if (hk1 != ""){
     SB_SetText(" " . hk1 , 1, 1)
   } else {

@@ -54,7 +54,7 @@ DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.185"
+appVersion := "0.186"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -125,8 +125,6 @@ exitHotkeyDefault := "+!t"
 exitHotkey := exitHotkeyDefault
 
 ;------------------------------- Gui parameter -------------------------------
-activeWin := 0
-
 windowPosX := 0
 windowPosY := 0
 windowWidth := 0
@@ -249,7 +247,7 @@ mainWindow(hide := false) {
 	exitText := "Kill app!" 
 	Menu, MainMenu, Add,%exitText%,exit
 	
-	Gui,guiMain:New,+E0x08000000 +OwnDialogs +LastFound MaximizeBox HwndhMain +Resize, %app%
+	Gui,guiMain:New,+OwnDialogs +LastFound MaximizeBox HwndhMain +Resize, %app%
 	
 	Gui, guiMain:Font, s%fontsize%, %font%
 
@@ -277,13 +275,12 @@ mainWindow(hide := false) {
 	
 	Gui, guiMain:Add, StatusBar,,
 	
-	showMessage("", msgDefault)
+	showMessage("", msgDefault,100, 800)
 	
 	Gui, guiMain:Menu, MainMenu
 		
 	if (!hide){
 		setTimer,checkFocus,3000
-		setTimer,registerWindow,-500
 		Gui, guiMain:Show, x%windowPosX% y%windowPosY% w%windowWidth% h%windowHeight%
 	}
 
@@ -316,19 +313,9 @@ saveUseImportsFile(){
 	return
 }
 
-;------------------------------ registerWindow ------------------------------
-registerWindow(){
-	global activeWin
-	
-	activeWin := WinActive("A")
-		
-	return
-}
-
 ;******************************** checkFocus ********************************
 checkFocus(){
 	global hMain
-	global activeWin
 	global windowPosX
 	global windowPosY
 	global windowWidth
@@ -337,7 +324,7 @@ checkFocus(){
 	global configFile
 
 	h := WinActive("A")
-	if (activeWin != h){
+	if (hMain != h){
 		hideWindow()
 	} else {
 		static xOld := 0
@@ -451,7 +438,7 @@ readIni(){
 			replcommandsArr.push(replcommand%A_Index%)
 	}
 	
-	msgDefault := "Click + [CTRL] -> filemanager, Click + [SHIFT] -> build.sbt, Click +	[Capslock] -> use WSL"
+	msgDefault := "Hold key down while clicking: [CTRL] -> filemanager, [SHIFT] -> build.sbt, [Capslock] -> use WSL"
 	
 	return
 }
@@ -715,7 +702,6 @@ readCmd(){
 		}
 	}
 
-
 	return
 }
 
@@ -788,7 +774,6 @@ showWindow(){
 	global windowHeight
 	
 	setTimer,checkFocus,3000
-	setTimer,registerWindow,-500
 	Gui, guiMain:Show, x%windowPosX% y%windowPosY% w%windowWidth% h%windowHeight%
 	
 	return
@@ -815,7 +800,7 @@ showWindowRefreshed(){
 	showWindow()
 	refreshGui()
 	
-	showMessage("", msgDefault)
+	showMessage("", msgDefault,100, 800)
 	
 	return
 }
