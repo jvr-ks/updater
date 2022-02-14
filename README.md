@@ -36,6 +36,7 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
+
 0.185 | If focus lost, Gui closes after 3 seconds, use hotkey to reopen (app still running in the background!)
 0.185 | WSL Support: activate Capslock (autom. deactivated) to use WSL (additionalCommand not used)
 0.183 | Start-parameter "imports"
@@ -306,6 +307,17 @@ Command-number: 1 or 2 ... N | autostart this command (app stays in the backgrou
 Config-file | must have extension ".ini"
 Command-file | must have extension ".txt"
 remove | removes app from memory
+
+##### Rest Api
+Seleting an entry via the commandline (besides manual selection) takes time because the app must be restarted.  
+From version 0.188 the app is listening on port 65002 (port is fixed at the moment!).  
+TODO: set scsRestPort (\[Config-file] -> \[setup], 65002 is default).  
+Example using "curl":  
+curl http://localhost:65502/scs?name=(testareaQuick)  
+Starts the entry named "(testareaQuick)".  
+Instead off curl any browser is usable too.
+To stop sbt_console_select from listening to the port the command-line parameter "restapioff" may be used,  
+or an entry in the \[Config-file] -> \[setup] -> restapioff=yes.  
   
 ##### Sourcecode: [Autohotkey format](https://www.autohotkey.com)  
 
@@ -333,6 +345,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1644833991
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1644875610
 )  
 Use [CTRL] + Click to open in a new window! 

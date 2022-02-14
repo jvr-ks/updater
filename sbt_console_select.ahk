@@ -49,12 +49,18 @@
 #Include, Lib\ahk_common.ahk
 #Include, Lib\WinGetPosEx.ahk
 
+; https://github.com/zhamlin/AHKhttp
+#include, Lib\AHKhttp.ahk
+
+; http://www.autohotkey.com/forum/viewtopic.php?p=355775
+#include, Lib\AHKsock.ahk
+
 msgDefault := ""
 DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.187"
+appVersion := "0.188"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -124,6 +130,9 @@ replResethotkey := replResethotkeyDefault
 exitHotkeyDefault := "+!t"
 exitHotkey := exitHotkeyDefault
 
+scsRestPortDefault := 65503
+scsRestPort := scsRestPortDefault
+
 ;------------------------------- Gui parameter -------------------------------
 windowPosX := 0
 windowPosY := 0
@@ -143,7 +152,9 @@ shortcutsArr := {}
 replcommandsArr := []
 ;---------------------------------- Params ----------------------------------
 hideOnStartup := false
+autoselect := false
 autoselectName := ""
+restapi := true
 
 MouseGetPos, posXsave, posYsave
 
@@ -166,17 +177,22 @@ Loop % A_Args.Length()
 		useImportsFile := false
 	}
 	
+	if(eq(A_Args[A_index],"restapioff")){
+		restapi := false
+	}
+		
 	if(eq(A_Args[A_index],"hidewindow")){
 		hidewindow := true
-	
 	}
+	
 	FoundPos := RegExMatch(A_Args[A_index],"\([\s\w]+?\)", found)
 	
 	If (FoundPos > 0){
 		autoSelectName := found
+		autoselect := true
 		showHint(app . " selected entry: " . autoSelectName, 5000)
-    ; old instance must be closed, takes time ...
-    sleep,3000 
+		; old instance must be closed, takes time ...
+		sleep,3000 
 	}
 }
 
@@ -190,6 +206,21 @@ readCmd()
 readShortcuts()
 readGuiParam()
 
+;  serverHttp 
+if (restapi){
+; Servermode
+	paths := {}
+	paths["/scs"] := Func("scsRest")
+
+	serverHttp := new HttpServer()
+	serverHttp.LoadMimes(A_ScriptDir . "/mime.types")
+	serverHttp.SetPaths(paths)
+	; serverHttp.Serve(scsRestPort)
+	serverHttp.Serve(65502)
+} else {
+	showHint(app . " Rest API disabled", 3000)
+}
+
 if (!hideOnStartup){
 	mainWindow()
 } else {
@@ -197,8 +228,33 @@ if (!hideOnStartup){
 	tipScreenTopTime(msg1, 4000)
 	mainWindow(hideOnStartup)
 }
-	
+
 return
+
+;---------------------------------- scsRest ----------------------------------
+scsRest(ByRef req, ByRef res) {
+	global autoSelectName
+	global app
+	global entryNameArr
+	
+; request example -> curl http://localhost:65503/scs?name=(testareaQuick)
+	autoSelectName := req.queries["name"]
+	
+	sel := entryNameArr[autoselectName]
+	if(sel > 0){
+		res.SetBodyText("Starting / opening: " . autoSelectName)
+		showHint(app . " selected entry: " . autoSelectName, 5000)
+		res.status := 200
+		runInDir(sel)
+	} else {
+		res.SetBodyText("Selected entry: " . autoSelectName . " not found!")
+		showHint(app . " selected entry: " . autoSelectName . " not found!", 5000)
+		res.status := 200
+	}
+	
+	return
+}
+
 ;-------------------------------- mainWindow --------------------------------
 mainWindow(hide := false) {
 	global hMain
@@ -233,6 +289,8 @@ mainWindow(hide := false) {
 	global msgDefault
 	global autoselectName
 	global useImportsFile
+	
+	global autoselect
 	
 	Menu, Tray, UseErrorLevel	 ; This affects all menus, not just the tray.
 	
@@ -280,7 +338,7 @@ mainWindow(hide := false) {
 	showMessage("", msgDefault,100, 800)
 	
 	Gui, guiMain:Menu, MainMenu
-		
+
 	if (!hide){
 		setTimer,checkFocus,3000
 		Gui, guiMain:Show, x%windowPosX% y%windowPosY% w%windowWidth% h%windowHeight%
@@ -397,6 +455,10 @@ readIni(){
 	global additionalCommand
 	global useImportsFile
 	global wslStart
+  
+	global scsRestPortDefault
+	global scsRestPort
+	global restapi
 	
 
 ; read Hotkey definition
@@ -441,6 +503,12 @@ readIni(){
 	}
 	
 	msgDefault := "Hold key down while clicking: [CTRL] -> filemanager, [SHIFT] -> build.sbt, [Capslock] -> use WSL"
+	
+	IniRead, scsRestPort, %configFile%, config, scsRestPort, %scsRestPortDefault%
+	
+	IniRead, restapioffRead, %configFile%, config, restapioff, no
+	if (InStr(restapioffRead,"y"))
+		restapi := false
 	
 	return
 }
@@ -1127,8 +1195,10 @@ readGuiParam(){
 	IniRead, windowPosFixed, %configFile%, config, windowPosFixed, 0
 	
 	IniRead, windowPosX, %configFile%, config, windowPosX, 0
+	windowPosX := Max(windowPosX,0)
 		
 	IniRead, windowPosY, %configFile%, config, windowPosY, 0
+	windowPosY := Max(windowPosY,0)
 		
 	IniRead, windowWidth, %configFile%, config, windowWidth, %windowWidthDefault%
 	if (windowWidth == 0)
