@@ -54,7 +54,7 @@ DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.186"
+appVersion := "0.187"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -168,13 +168,15 @@ Loop % A_Args.Length()
 	
 	if(eq(A_Args[A_index],"hidewindow")){
 		hidewindow := true
-	}
 	
+	}
 	FoundPos := RegExMatch(A_Args[A_index],"\([\s\w]+?\)", found)
 	
 	If (FoundPos > 0){
 		autoSelectName := found
-		showHint(app . " selected entry: " . autoSelectName, 3000)
+		showHint(app . " selected entry: " . autoSelectName, 5000)
+    ; old instance must be closed, takes time ...
+    sleep,3000 
 	}
 }
 
@@ -856,7 +858,7 @@ runInDir(lineNumber){
 		
 	if (GetKeyState("Capslock", "T") == 1)
 		sw := 4
-		
+	
 	switch sw
 	{
 		case 0,1:
