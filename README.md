@@ -317,13 +317,15 @@ Known commands:
 * open=[entryname]   
 * close=[entryname]  
   
-Example using "curl":  
+Example using "curl",  
+do *NOT* run it from the command-line, the title will be changed, including "(testareaQuick)",  
+so it will open itself, use the batch-file "test_curl_open.bat" etc.:  
 curl http://localhost:65005/scs?open=(testareaQuick)  
 Starts the entry named "(testareaQuick)".  
 Instead off curl any browser is usable too.  
 
 curl http://localhost:65005/scs?close=(testareaQuick) 
-Sends Ctrl-D and "exit" to the console window named (title starts with) "testareaQuick". 
+Sends Ctrl-D (closes the REPL) and "exit" to the console window named (title contains with) "testareaQuick". 
   
 To stop sbt_console_select from listening to the port the command-line parameter "restapioff" may be used,  
 or an entry in the \[Config-file] -> \[setup] -> restapioff=1.  
