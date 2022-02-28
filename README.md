@@ -22,14 +22,14 @@ and the file "project\build.properties" with the SBT version information).
 ##### Download  
 
 Download from github:  
-[sbt_console_select as ZIP-file](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.zip)  
+[sbt_console_select as ZIP-file](https://github.com/jvr-ks/sbt_console_select/raw/main/sbt_console_select.zip)  
 
 
 or  
-[sbt_console_select.exe](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.exe)   
-[sbt_console_select.ini](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.ini)   
-[sbt_console_select.txt](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select.txt)    
-[sbt_console_select_shortcuts.txt](https://github.com/jvr-ks/sbt_console_select/raw/master/sbt_console_select_shortcuts.txt)   
+[sbt_console_select.exe](https://github.com/jvr-ks/sbt_console_select/raw/main/sbt_console_select.exe)   
+[sbt_console_select.ini](https://github.com/jvr-ks/sbt_console_select/raw/main/sbt_console_select.ini)   
+[sbt_console_select.txt](https://github.com/jvr-ks/sbt_console_select/raw/main/sbt_console_select.txt)    
+[sbt_console_select_shortcuts.txt](https://github.com/jvr-ks/sbt_console_select/raw/main/sbt_console_select_shortcuts.txt)   
   
 Virus check see below.  
 
@@ -87,7 +87,7 @@ Click an entry in the list to start the command as defined in "sbt_console_selec
 
 ##### Hotkey operations supplied by the app  
  
-[Overview of all default Hotkeys used by my Autohotkey "tools"](https://github.com/jvr-ks/cmdlinedev/blob/master/hotkeys.md)  
+[Overview of all default Hotkeys used by my Autohotkey "tools"](https://github.com/jvr-ks/cmdlinedev/blob/main/hotkeys.md)  
    
 (default -> \[Config-file]):  
 
@@ -268,7 +268,7 @@ the path is not set, so using the actual path of the "sbt_console_select.exe")
 ##### Start REPL
 
 (SBT must be installed!) 
-* Using included files "build.sbt" and "scalafxTest2.sc" which is [based on https://github.com/scalafx/scalafx/blob/master/scalafx-demos/src/main/scala/scalafx/ColorfulCircles.scala](https://github.com/scalafx/scalafx/blob/master/scalafx-demos/src/main/scala/scalafx/ColorfulCircles.scala)
+* Using included files "build.sbt" and "scalafxTest2.sc" which is [based on https://github.com/scalafx/scalafx/blob/main/scalafx-demos/src/main/scala/scalafx/ColorfulCircles.scala](https://github.com/scalafx/scalafx/blob/main/scalafx-demos/src/main/scala/scalafx/ColorfulCircles.scala)
 * Type \[Alt] + \[t] to reopen sbt_console_select
 * Click on the last entry, sbt consoleQuick is started  
 * It takes a moment to start the REPL, (using included file "built.sbt") 
@@ -355,7 +355,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Copyright (c) 2020/2021 J. v. Roos  
 
 
-##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1646077434
+##### Virusscan at Virustotal 
+[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1646079499
 )  
+[Virusscan at Virustotal, updater2.exe 32bit-exe, Check here]()  
+[Virusscan at Virustotal, updaterA32.exe 32bit-exe ANSI, Check here]()  
 Use [CTRL] + Click to open in a new window! 

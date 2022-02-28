@@ -1,0 +1,4 @@
+sbt_console_select.exe
+sbt_console_select.ini
+sbt_console_select.txt
+sbt_console_select_shortcuts.txt
