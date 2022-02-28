@@ -55,12 +55,14 @@
 ; http://www.autohotkey.com/forum/viewtopic.php?p=355775
 #include, Lib\AHKsock.ahk
 
+SetTitleMatchMode, 2
+
 msgDefault := ""
 DetectHiddenWindows, Off
 
 ;---------------------------------- appName ----------------------------------
 appName := "sbt_console_select"
-appVersion := "0.188"
+appVersion := "0.189"
 app := appName . " " . appVersion
 
 SetWorkingDir, %A_ScriptDir%
@@ -130,7 +132,7 @@ replResethotkey := replResethotkeyDefault
 exitHotkeyDefault := "+!t"
 exitHotkey := exitHotkeyDefault
 
-scsRestPortDefault := 65503
+scsRestPortDefault := 65505
 scsRestPort := scsRestPortDefault
 
 ;------------------------------- Gui parameter -------------------------------
@@ -178,7 +180,7 @@ Loop % A_Args.Length()
 	}
 	
 	if(eq(A_Args[A_index],"restapioff")){
-		restapi := false
+		restapioff := 1
 	}
 		
 	if(eq(A_Args[A_index],"hidewindow")){
@@ -207,7 +209,7 @@ readShortcuts()
 readGuiParam()
 
 ;  serverHttp 
-if (restapi){
+if (!restapioff){
 ; Servermode
 	paths := {}
 	paths["/scs"] := Func("scsRest")
@@ -215,8 +217,10 @@ if (restapi){
 	serverHttp := new HttpServer()
 	serverHttp.LoadMimes(A_ScriptDir . "/mime.types")
 	serverHttp.SetPaths(paths)
-	; serverHttp.Serve(scsRestPort)
-	serverHttp.Serve(65502)
+	if (scsRestPort != "" && scsRestPort > 1000)
+		serverHttp.Serve(scsRestPort)
+	else
+		serverHttp.Serve(65005)
 } else {
 	showHint(app . " Rest API disabled", 3000)
 }
@@ -237,19 +241,34 @@ scsRest(ByRef req, ByRef res) {
 	global app
 	global entryNameArr
 	
-; request example -> curl http://localhost:65503/scs?name=(testareaQuick)
-	autoSelectName := req.queries["name"]
+; request example -> curl http://localhost:65505/scs?open=(testareaQuick)
+	autoSelectName := req.queries["open"]
+	closeName := req.queries["close"]
 	
-	sel := entryNameArr[autoselectName]
-	if(sel > 0){
-		res.SetBodyText("Starting / opening: " . autoSelectName)
-		showHint(app . " selected entry: " . autoSelectName, 5000)
+	if (autoSelectName != ""){
+		sel := entryNameArr[autoselectName]
+		if(sel > 0){
+			res.SetBodyText("Starting / opening: " . autoSelectName)
+			showHint(app . " selected entry (" . sel . "): " . autoSelectName, 4000)
+			res.status := 200
+			runInDir(sel)
+		} else {
+			res.SetBodyText("Selected entry: " . autoSelectName . " not found!")
+			showHint(app . " selected entry: " . autoSelectName . " not found!", 4000)
+			res.status := 200
+		}
+	}
+	if (closeName != ""){
+		res.SetBodyText("Closing: " . closeName)
 		res.status := 200
-		runInDir(sel)
-	} else {
-		res.SetBodyText("Selected entry: " . autoSelectName . " not found!")
-		showHint(app . " selected entry: " . autoSelectName . " not found!", 5000)
-		res.status := 200
+		toClose := StrReplace(closeName,"(","")
+		toClose := StrReplace(toClose,")","")
+		
+		; winactivate,%toClose%
+		ControlSend, ahk_parent, ^d, %toClose%
+		ControlSend, ahk_parent, {text}exit, %toClose%
+		ControlSend, ahk_parent, {enter}, %toClose% 
+		
 	}
 	
 	return
@@ -289,7 +308,8 @@ mainWindow(hide := false) {
 	global msgDefault
 	global autoselectName
 	global useImportsFile
-	
+	global restapioff
+	global scsRestPort
 	global autoselect
 	
 	Menu, Tray, UseErrorLevel	 ; This affects all menus, not just the tray.
@@ -307,7 +327,10 @@ mainWindow(hide := false) {
 	exitText := "Kill app!" 
 	Menu, MainMenu, Add,%exitText%,exit
 	
-	Gui,guiMain:New,+OwnDialogs +LastFound MaximizeBox HwndhMain +Resize, %app%
+	if (restapioff)
+		Gui,guiMain:New,+OwnDialogs +LastFound MaximizeBox HwndhMain +Resize, %app% (RestAPI: offline)
+	Else
+		Gui,guiMain:New,+OwnDialogs +LastFound MaximizeBox HwndhMain +Resize, %app% (RestAPI-port: %scsRestPort%)
 	
 	Gui, guiMain:Font, s%fontsize%, %font%
 
@@ -458,7 +481,7 @@ readIni(){
   
 	global scsRestPortDefault
 	global scsRestPort
-	global restapi
+	global restapioff
 	
 
 ; read Hotkey definition
@@ -506,9 +529,7 @@ readIni(){
 	
 	IniRead, scsRestPort, %configFile%, config, scsRestPort, %scsRestPortDefault%
 	
-	IniRead, restapioffRead, %configFile%, config, restapioff, no
-	if (InStr(restapioffRead,"y"))
-		restapi := false
+	IniRead, restapioff, %configFile%, config, restapioff, 0
 	
 	return
 }
@@ -569,20 +590,9 @@ replLoadAction(selectAll := false){
 			FileAppend , %code%, %replFile%
 			FileAppend ,`n, %replFile%
 			
-			SetTitleMatchMode, 2
-			winFound := false
-			
-			if WinExist(lastOpendTitle){
+			if (winExist(lastOpendTitle)){
 				winActivate,%lastOpendTitle%
-				winFound := true
-			} else {
-				if WinExist("ahk_class ConsoleWindowClass"){
-					winActivate,ahk_class ConsoleWindowClass
-					winFound := true
-				}
-			}
 			
-			if (winFound){
 				l := replcommandsArr.length()
 				Loop, %l%
 				{
@@ -616,7 +626,7 @@ replLoadAction(selectAll := false){
 						}
 						specialCommand := true
 					}
-									 
+					
 					isLoadExec := RegExMatch(toSend, "i)--load imports--")
 					
 					if (isLoadExec && !comment){
@@ -645,8 +655,8 @@ replLoadAction(selectAll := false){
 					winActivate,ahk_id %isWin%
 				}
 
-			} else {		
-				msgbox, No suitable Console-Window found!
+			} else {
+				msgbox,48,ERROR, Console-Window %lastOpendTitle% not found!
 			}		
 		} else {
 			msgbox, No code to run in REPL selected!
@@ -689,22 +699,11 @@ replReset(){
 	
 	importsLoaded := false
 	
-	SetTitleMatchMode, 2
-	winFound := false
-	
 	isWin := WinActive("A")
 	
 	if WinExist(lastOpendTitle){
 		winActivate,%lastOpendTitle%
-		winFound := true
-	} else {
-		if WinExist("ahk_class ConsoleWindowClass"){
-			winActivate,ahk_class ConsoleWindowClass
-			winFound := true
-		}
-	}
 	
-	if (winFound){
 		toSend := ":reset`n"
 		SendInput,{text}%toSend%
 		
@@ -938,45 +937,37 @@ runInDir(lineNumber){
 				Run, %startApp%,%d%,max
 				sleep, 3000
 			}
-					
+
 			title := "_newone"
 			if (WinExist(lastOpendTitle)){
 				title := lastOpendTitle
 				winActivate,%title%
-			} else {
-				if (WinExist("cmd.exe")){
-					title := "cmd.exe"
-					winActivate,%title%
-				}
 			}
-			
+
 			if (title == "_newone"){
 				startEnv := cvtPath("%comspec%") . " /k" 
 				lineArr := StrSplit(startcmdArr[lineNumber],"#")
 				startCmd := lineArr[1]
 				param := lineArr[2]
-				SetTitleMatchMode, 2
 				
 				Run, %startEnv%,%d%,max
-				sleep, 3000
-				
+				sleep, 2000
+
 				toSend := "title " . lastOpendTitle
-				SendInput,{text}%toSend%
-				SendInput,{ENTER}
-				sleep, 50
-				
+				ControlSend, ahk_parent, {text}%toSend%, ahk_class ConsoleWindowClass
+				ControlSend, ahk_parent, {ENTER}, ahk_class ConsoleWindowClass 
+
 				if (additionalCommand != ""){
-					sleep, 500
-					SendInput,{text}%additionalCommand%
-					SendInput,{ENTER}
+					sleep, 1000
+					ControlSend, ahk_parent, {text}%additionalCommand%,%lastOpendTitle%
+					ControlSend, ahk_parent, {ENTER},%lastOpendTitle%
 					sleep, 1000
 				}
 				
-				SendInput,{text}%startCmd%
-				SendInput,{ENTER}
+				ControlSend, ahk_parent, {text}%startCmd%,%lastOpendTitle%
+				ControlSend, ahk_parent, {ENTER},%lastOpendTitle%
 				
 				if (param != ""){
-					winActivate,%title%
 					lineArrLength := lineArr.Length() - 1
 					Loop, % lineArrLength
 					{
@@ -993,6 +984,8 @@ runInDir(lineNumber){
 								break
 							} else {
 								clipboard := param
+								
+								winActivate,%lastOpendTitle%
 								Send {Ctrl down}v{Ctrl up}
 								SendInput,{Enter}
 							}
@@ -1017,7 +1010,7 @@ runInDir(lineNumber){
 			SetCapsLockState, OFF
 			Run, %wslStart%,,max
 			DetectHiddenText, On
-			SetTitleMatchMode, 2
+
 			tipTop("Waiting until Microsoft Windows-Subsystem für Linux is ready ...")
 			WinWaitActive,ahk_exe wsl.exe,,10
 			tipTopClose()

@@ -1,4 +1,4 @@
-(testareaQuick),[scL]\__testarea,sbt consoleQuick
+(testareaQuick),[scL]\__testarea,sbt -Dsbt.version=1.6.2 consoleQuick 
 (getUrlLength),[sc]\getUrlLength,sbt consoleQuick
 (Scala3_Learn),[scL]\scala3,sbt consoleQuick
 (AkkatypedQuick),[scL]\akkatyped,sbt consoleQuick

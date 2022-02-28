@@ -7,12 +7,13 @@ Simple app to start "sbt console" or "sbt consoleQuick" in different directories
 "sbt console" or "sbt consoleQuick" starts the Scala REPL,  
 using additional information supplied by the SBT build system.  
 Windows only, but can be used with the WSL.  
+  
 The app changes the Clipboard-content!  
   
 Can be used to start any programm/app in a selectable directory.  
 ("sbt console" needs a ["build.sbt"-file](https://www.scala-sbt.org/1.x/docs/Basic-Def.html) in the running directory  
 and the file "project\build.properties" with the SBT version information).  
- 
+  
 ##### App status  
 
 * Usable, but work in progress!  
@@ -36,7 +37,10 @@ Virus check see below.
   
 Version (>=)| Change
 ------------ | -------------
-
+0.190 | Rest Api changed
+0.189 | Will not use an open cmd.exe console window, but start a new one, only reusing an existing with the "correct" title.  
+0.188 | If console is in the background, still gets the commands (a little faster).
+0.187 | Port changed to 65005 default (\[Config-file] ->  \[config] -> scsRestPort
 0.185 | If focus lost, Gui closes after 3 seconds, use hotkey to reopen (app still running in the background!)
 0.185 | WSL Support: activate Capslock (autom. deactivated) to use WSL (additionalCommand not used)
 0.183 | Start-parameter "imports"
@@ -59,8 +63,6 @@ Issue / Bug | Type | fixed in version
 ------------ | ------------- | -------------
 Ctrl + E copies old contents | bug | 0.179 
 Blanks in entry-names not allowed | issue | 0.167  
-  
- 
     
 ##### Usage  
 
@@ -95,7 +97,7 @@ Click an entry in the list to start the command as defined in "sbt_console_selec
 * replLoadHotkey: **\[ALT] + \[e]**  
 or  
 * **\[CTRL] + \[e]**  
-(use only the selected code).  
+(uses only the selected code then).  
   
 The code is saved to the temporary file "repl.tmp".  
 Then the "[replcommands]"-section of the \[Config-file] is used, to execute the code, see below.  
@@ -158,7 +160,7 @@ replcommand3=--load the codeExec--
 Comment out any commands with "//".  
 All SBT console commands are usable, i.e. ":load" etc. .  
   
-The SBT-console is identified by its title with an id created from actual time.  
+The SBT-console is identified by its title (starts with it...).  
   
 After SBT has finished execution, press the **\[CTRL]**-key to bring the Notepad\++ window to the foreground again.
   
@@ -249,7 +251,7 @@ Scala-version: SBT uses the definition in the file "build.sbt"
 
 ##### Remarks
 
-* Do not change the Console-Window if the last command has not started!  
+* ~~Do not change the Console-Window if the last command has not started!~~    
 * Last opened (by sbt_console_select) Console-Window is peferred over other Console-Windows running. 
 * Can be used not only to start sbt but many other tools, starts a %comspec% shell if command-field is emtpy.
 * REPL Past mode:  
@@ -310,14 +312,21 @@ remove | removes app from memory
 
 ##### Rest Api
 Seleting an entry via the commandline (besides manual selection) takes time because the app must be restarted.  
-From version 0.188 the app is listening on port 65002 (port is fixed at the moment!).  
-TODO: set scsRestPort (\[Config-file] -> \[setup], 65002 is default).  
+From version 0.188 the app is listening on port scsRestPort (\[Config-file] -> \[setup], 65005 is default), path: "scs".  
+Known commands:  
+* open=[entryname]   
+* close=[entryname]  
+  
 Example using "curl":  
-curl http://localhost:65502/scs?name=(testareaQuick)  
+curl http://localhost:65005/scs?open=(testareaQuick)  
 Starts the entry named "(testareaQuick)".  
-Instead off curl any browser is usable too.
+Instead off curl any browser is usable too.  
+
+curl http://localhost:65005/scs?close=(testareaQuick) 
+Sends Ctrl-D and "exit" to the console window named (title starts with) "testareaQuick". 
+  
 To stop sbt_console_select from listening to the port the command-line parameter "restapioff" may be used,  
-or an entry in the \[Config-file] -> \[setup] -> restapioff=yes.  
+or an entry in the \[Config-file] -> \[setup] -> restapioff=1.  
   
 ##### Sourcecode: [Autohotkey format](https://www.autohotkey.com)  
 
@@ -345,6 +354,6 @@ Copyright (c) 2020/2021 J. v. Roos
 
 
 ##### Virus check at Virustotal 
-[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1644875610
+[Check here](https://www.virustotal.com/gui/url/ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8/detection/u-ff99979467dfc66771a6fc4ea2525f0071804ae60257147bee1b05f626c48eb8-1646077434
 )  
 Use [CTRL] + Click to open in a new window! 
