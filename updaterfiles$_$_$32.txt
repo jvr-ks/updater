@@ -1,0 +1,6 @@
+updater.exe,no
+updater32.exe,no
+updaterA32.exe,no
+updater.ini,no
+Licenses.txt,no
+updater.ahk,no
