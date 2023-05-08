@@ -63,7 +63,7 @@ wrkDir := A_ScriptDir . "\"
 appName := "Updater"
 appnameLower := "updater"
 extensionExe := ".exe"
-appVersion := "0.039"
+appVersion := "0.040"
 appVersionRemote := "0.000"
 appVersionFile := "updaterversion$_$_$.txt"
 
@@ -130,8 +130,7 @@ Loop % A_Args.Length()
   FoundPos := RegExMatch(A_Args[A_index],"O)--usePath=(.*)", m)
   if(FoundPos > 0){
     preferedPathForced := m.value(m.Count())
-  }  
-  
+  }
 }
 
 clientWidth := 900
@@ -295,7 +294,7 @@ mainWindow() {
     LV_Add("",index,name,enable,"","",strategy,targetpath,sourceURL)
   }
  
-  Gui, guiMain:Show, center autosize
+  Gui, guiMain:Show, xcenter y20 autosize
 
   adjustLV1()
   

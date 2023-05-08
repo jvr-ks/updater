@@ -5,6 +5,14 @@
 
 cd %~dp0
 
+echo.
+echo Using Selja as test-app, i.e. branding "updater.exe" to "selja"
+echo.
+
+echo repoName := "selja"  > reponame.ahk
+
+pause
+
 set appname=updater
 set _testDir=C:\jvrks\updater\
 
@@ -19,6 +27,9 @@ call "%autohotkeyExe%" /in %appname%.ahk /out %_testDir%%appname%A32.exe /icon %
 
 
 copy /Y updaterfiles$_$_$*.* %_testDir%*.*
+
+cd %_testDir%
+
 
 @rem should open the default file-explorer 
 start %_testDir%
