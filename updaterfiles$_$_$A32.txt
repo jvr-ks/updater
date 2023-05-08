@@ -1,0 +1,3 @@
+updaterA32.exe,forced
+updater.ini,no
+Licenses.txt,no

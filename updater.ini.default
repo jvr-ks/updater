@@ -1,0 +1,10 @@
+[config]
+targetAppname=Updater
+font="Calibri"
+fontsize=10
+serverURL="https://github.com/jvr-ks/"
+serverURLExtension="/raw/main/"
+serverUpdaterURL="https://github.com/jvr-ks/"
+serverUpdaterURLExtension="/raw/main/"
+preferedPath=C:\jvrks\updater\
+
