@@ -618,7 +618,7 @@ checkSize(){
     fl := FileOpen(targetpath . name, "r").Length
     if (fl == ""){
       LV_Modify(index , "Col4", "ERROR!")
-      showHintColored(hmain, "ERROR occured (file-size is zero)!", 5000, "cFF0000", "cFFFFFF", font, fontsize)
+      showHintColored(hmain, "ERROR occured (file-size is zero)!", 5000)
       Beep(750, 300)
       Beep(750, 300)
       Beep(750, 300)
@@ -835,7 +835,7 @@ startDownload(){
     
     GuiControl, , progressDownLoadURL, Update done!
      
-    showHintColored(hmain, "Update done!", 3000, "c00FF00", "c000000",font, fontsize)
+    showHintColored(hmain, "Update done!")
       
     Beep(750, 300)
     Beep(750, 300)
@@ -1332,10 +1332,18 @@ StrLower(s){
   return r
 }
 ;------------------------------ showHintColored ------------------------------
-showHintColored(handle, s, n, fg, bg, font := "Segoe UI", fontsize := 9){
+showHintColored(handle, s := "", n := 3000, fg := "cffffff", bg := "a900ff", newfont := "", newfontsize := ""){
+  global guiMain
+  global font, fontsize
   
-  Gui, hintColored:new, HWNDhChild
-  Gui, hintColored:Font, s%fontsize%, %font%
+  if (newfont == "")
+    newfont := font
+    
+  if (newfontsize == "")
+    newfontsize := fontsize
+  
+  Gui, hintColored:new, hwndhHintColored +0x80000000
+  Gui, hintColored:Font, s%newfontsize%, %newfont%
   Gui, hintColored:Font, c%fg%
   Gui, hintColored:Color, %bg%
   Gui, hintColored:Add, Text,, %s%
@@ -1406,7 +1414,7 @@ genDefaultBatch(){
     }
   }
   
-  showHintColored(hmain, "Generated batch-file: " . defaultBatch, 3000, "c00FF00", "c000000", font, fontsize)
+  showHintColored(hmain, "Generated batch-file: " . defaultBatch)
   
   return
 }
