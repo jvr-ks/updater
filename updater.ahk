@@ -75,7 +75,7 @@ bit := (A_PtrSize=8 ? "64" : "32")
 if (!A_IsUnicode)
   bit := "A" . bit
   
-app := appName . " " . appVersion . " " . bit . "-bit"
+app := appName . " " . appVersion . " (" . bit . " bit)"
 
 targetAppname := repoName
 
