@@ -63,7 +63,7 @@ wrkDir := A_ScriptDir . "\"
 appName := "Updater"
 appnameLower := "updater"
 extensionExe := ".exe"
-appVersion := "0.040"
+appVersion := "0.041"
 appVersionRemote := "0.000"
 appVersionFile := "updaterversion$_$_$.txt"
 
@@ -1604,19 +1604,20 @@ showMessage(t1 := "", t2 := ""){
   return
 }
 ;--------------------------- GetProcessMemoryUsage ---------------------------
-GetProcessMemoryUsage(){
-
-  OwnPID := DllCall("GetCurrentProcessId")
-  static PMC_EX := "", size := NumPut(VarSetCapacity(PMC_EX, 8 + A_PtrSize * 9, 0), PMC_EX, "uint")
-
-  if (hProcess := DllCall("OpenProcess", "uint", 0x1000, "int", 0, "uint", OwnPID)) {
-    if !(DllCall("GetProcessMemoryInfo", "ptr", hProcess, "ptr", &PMC_EX, "uint", size))
-      if !(DllCall("psapi\GetProcessMemoryInfo", "ptr", hProcess, "ptr", &PMC_EX, "uint", size))
-        return (ErrorLevel := 2) & 0, DllCall("CloseHandle", "ptr", hProcess)
-    DllCall("CloseHandle", "ptr", hProcess)
-    return Round(NumGet(PMC_EX, 8 + A_PtrSize * 8, "uptr") / 1024**2, 2)
-  }
-  return (ErrorLevel := 1) & 0
+GetProcessMemoryUsage() {
+    PID := DllCall("GetCurrentProcessId")
+    size := 440
+    VarSetCapacity(pmcex,size,0)
+    ret := ""
+    
+    hProcess := DllCall( "OpenProcess", UInt,0x400|0x0010,Int,0,Ptr,PID, Ptr )
+    if (hProcess)
+    {
+        if (DllCall("psapi.dll\GetProcessMemoryInfo", Ptr, hProcess, Ptr, &pmcex, UInt,size))
+            ret := Round(NumGet(pmcex, (A_PtrSize=8 ? "16" : "12"), "UInt") / 1024**2, 2)
+        DllCall("CloseHandle", Ptr, hProcess)
+    }
+    return % ret
 }
 ;----------------------------------- Exit -----------------------------------
 exit(){
