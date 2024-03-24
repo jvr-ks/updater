@@ -1,8 +1,8 @@
 @rem updater_default_files$_$_$A32.bat
 
-copy /Y "updaterA32.exe" "updaterA32.exe.default"
+xcopy /y /f "updaterA32.exe" "updaterA32.exe.default"
 
-copy /Y "updater.ini" "updater.ini.default"
+xcopy /y /f "updater.ini" "updater.ini.default"
 
-copy /Y "Licenses.txt" "Licenses.txt.default"
+xcopy /y /f "Licenses.txt" "Licenses.txt.default"
 

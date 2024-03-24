@@ -1,8 +1,8 @@
 @rem updater_default_files$_$_$64.bat
 
-copy /Y "updater.exe" "updater.exe.default"
+xcopy /y /f "updater.exe" "updater.exe.default"
 
-copy /Y "updater.ini" "updater.ini.default"
+xcopy /y /f "updater.ini" "updater.ini.default"
 
-copy /Y "Licenses.txt" "Licenses.txt.default"
+xcopy /y /f "Licenses.txt" "Licenses.txt.default"
 

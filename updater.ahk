@@ -63,7 +63,7 @@ wrkDir := A_ScriptDir . "\"
 appName := "Updater"
 appnameLower := "updater"
 extensionExe := ".exe"
-appVersion := "0.041"
+appVersion := "0.042"
 appVersionRemote := "0.000"
 appVersionFile := "updaterversion$_$_$.txt"
 
@@ -1402,7 +1402,7 @@ genDefaultBatch(){
       
       Try {
         quot := """"
-        content := "copy /Y " . quot . targetpath . downLoadFilename . quot . " " . quot . targetpath . downLoadFilenameTarget . downloadFileAddExtension . quot . "`n`n"
+        content := "xcopy /y /f " . quot . targetpath . downLoadFilename . quot . " " . quot . targetpath . downLoadFilenameTarget . downloadFileAddExtension . quot . "`n`n"
         FileAppend, %content%, %defaultBatch%
       }
       catch e
