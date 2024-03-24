@@ -225,10 +225,10 @@ Copyright (c) 2021 J. v. Roos
   
 <a name="virusscan"></a>  
 ##### Virusscan at Virustotal 
-[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1711290043
+[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1711291014
 )  
-[Virusscan at Virustotal, updater32.exe 32bit-exe, Check here](https://www.virustotal.com/gui/url/c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b/detection/u-c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b-1711290044
+[Virusscan at Virustotal, updater32.exe 32bit-exe, Check here](https://www.virustotal.com/gui/url/c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b/detection/u-c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b-1711291015
 )  
-[Virusscan at Virustotal, updaterA32.exe 32bit-exe ANSI, Check here](https://www.virustotal.com/gui/url/19f324e03bc2e4a0aca5441066e7b65433ae905213b98db82c24a29bfe23a3e6/detection/u-19f324e03bc2e4a0aca5441066e7b65433ae905213b98db82c24a29bfe23a3e6-1711290045
+[Virusscan at Virustotal, updaterA32.exe 32bit-exe ANSI, Check here](https://www.virustotal.com/gui/url/19f324e03bc2e4a0aca5441066e7b65433ae905213b98db82c24a29bfe23a3e6/detection/u-19f324e03bc2e4a0aca5441066e7b65433ae905213b98db82c24a29bfe23a3e6-1711291016
 )  
 Use [CTRL] + Click to open in a new window! 
