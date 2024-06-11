@@ -1,0 +1,35 @@
+/*
+updater.source.txt
+
+version:
+uses the version-file -> appVersionFile := "updaterversion$_$_$.txt" to hold the own version on the server
+and compares it (-> updateUpdater()) on startup with the current hardcoded version.
+chosed the name to not conflict with the target version file -> localVersionFile := "version.txt"
+
+Structure:
+Main gui name is -> "guiMain"
+
+central element is the ListView "LV1", handle "hLV1" -> mainWindow()
+click on an entry -> LVCommands()
+columns are: 
+name
+enable (Yes/no/forced)
+strategy (Update/delete ...)
+targetpath (example: lib)
+sourceURL (example: https://repo1.maven.org/maven2/org/openjfx/javafx-controls/16-ea+7/)
+
+The csv-file -> filesToUpdate := "updaterfiles$_$_$XXX.txt" holding the list of files to operate upon with strategy update/delete etc.
+is downloaded -> mainWindow() -> getUpdateInfo() from the server during startup,
+lines are store in the array -> "filesToUpdateArr", each line is split into -> ""
+
+Downloads are done to a file with extension -> downloadFileAddExtension := ".default" and then
+the function -> applyStrategies() decides what to do with the downloaded file (default: simple overwrite the target)
+No startegy is applied to files with a sourceURL, they are allways directly overwritten during download,
+and the progressbar is not used.
+
+
+Switch to special function with parameter "gendefaultbatch"
+-> genDefaultBatch()
+Using content from -> filesToUpdate := "updaterfiles$_$_$.txt", the file -> defaultBatch := "_updater_default_files$_$_$.bat" is created.
+The app exits then!
+*/

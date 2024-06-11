@@ -1,0 +1,3 @@
+updater.exe,forced
+updater.ini,no
+license.txt,no
