@@ -42,7 +42,7 @@ buttonHeight := 35
 deltaButton := 10
 
 fontDefault := "Segoe UI"
-fontsizeDefault := 11
+fontsizeDefault := 10
 
 ; used in first msgbox while maingui has not started yet!
 
@@ -279,7 +279,7 @@ mainWindow() {
     arrow := Chr(0x21A7)
     Gui, guiMain:Add, Text, xm yp+20, Installation-directory:
     Gui, guiMain:Add, Text, x+300 section, Messages: 
-    Gui, guiMain:Add, Edit, xm r1 w150 VpreferredPathEdit, %preferredPath%
+    Gui, guiMain:Add, Edit, xm r1 w250 VpreferredPathEdit, %preferredPath%
     Gui, guiMain:Add, Button, x+m GgetpreferredPath, Use the path entered
     Gui, guiMain:Add, Edit, xs yp r6 w400 VmessagesTextEdit
 
@@ -292,7 +292,7 @@ mainWindow() {
   } else {
     Gui, guiMain:Add, Text, xm yp+120, Installation directory:
     Gui, guiMain:Add, Text, x+300 section, Messages: 
-    Gui, guiMain:Add, Edit, xm r1 w150, %preferredPath%
+    Gui, guiMain:Add, Edit, xm r1 w250, %preferredPath%
 
     Gui, guiMain:Add, Edit, xs yp r6 w400 VmessagesTextEdit
     
