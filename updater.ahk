@@ -81,8 +81,10 @@ app := appName . " " . appVersion . " (" . bit . " bit)"
 
 targetAppname := repoName
 
-targetAppnameOverride := readIni("updater.ini", "config", "targetappnameoverride", "")
-if (targetAppnameOverride != ""){
+
+;TODO
+targetAppnameOverride := readIni("updater.ini", "config", "targetAppnameOverride", "NO")
+if (targetAppnameOverride != "NO"){
   targetAppname := targetAppnameOverride
   msgbox, targetAppname: %targetAppname%
 }

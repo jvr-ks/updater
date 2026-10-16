@@ -6,5 +6,5 @@ serverURLExtension="/raw/main/"
 serverUpdaterURL="https://raw.github.com/jvr-ks/"
 serverUpdaterURLExtension="/raw/main/"
 preferredPath=C:\jvrks\
-targetappnameoverride=""
+targetAppnameOverride="NO"
 
