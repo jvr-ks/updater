@@ -82,8 +82,11 @@ app := appName . " " . appVersion . " (" . bit . " bit)"
 targetAppname := repoName
 
 targetAppnameOverride := readIni("updater.ini", "config", "targetappnameoverride", "")
-if (targetAppnameOverride != "")
+if (targetAppnameOverride != ""){
   targetAppname := targetAppnameOverride
+  msgbox, targetAppname: %targetAppname%
+}
+msgbox, targetAppname: %targetAppname%
 
 localVersion := 0.000
 localVersionFile := "version.txt"
