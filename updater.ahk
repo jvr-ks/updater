@@ -83,12 +83,12 @@ targetAppname := repoName
 
 
 ;TODO
-targetAppnameOverride := readIni("updater.ini", "config", "targetAppnameOverride", "NO")
-if (targetAppnameOverride != "NO"){
-  targetAppname := targetAppnameOverride
-  msgbox, targetAppname: %targetAppname%
-}
-msgbox, targetAppname: %targetAppname%
+; targetAppnameOverride := readIni("updater.ini", "config", "targetAppnameOverride", "NO")
+; if (targetAppnameOverride != "NO"){
+  ; targetAppname := targetAppnameOverride
+  ; msgbox, targetAppname: %targetAppname%
+; }
+; msgbox, targetAppname: %targetAppname%
 
 localVersion := 0.000
 localVersionFile := "version.txt"
