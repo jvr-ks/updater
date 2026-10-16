@@ -65,7 +65,7 @@ wrkDir := A_ScriptDir . "\"
 appName := "Updater"
 appnameLower := "updater"
 extensionExe := ".exe"
-appVersion := "0.052"
+appVersion := "0.053"
 appVersionRemote := "0.000"
 appVersionFile := "updaterversion$_$_$.txt"
 
@@ -80,6 +80,10 @@ if (!A_IsUnicode)
 app := appName . " " . appVersion . " (" . bit . " bit)"
 
 targetAppname := repoName
+
+targetAppnameOverride := readIni("updater.ini", "config", "targetappnameoverride", "")
+if (targetAppnameOverride != "")
+  targetAppname := targetAppnameOverride
 
 localVersion := 0.000
 localVersionFile := "version.txt"
@@ -156,7 +160,7 @@ hasFinished := false
 downloadStarted := false
 
 targetAppnameLower := StrLower(targetAppname)
-preferredPathDefault := "C:\jvrde\" . targetAppnameLower . "\"
+preferredPathDefault := "C:\jvrde\"
 
 preferredPath := readIni("updater.ini", "config", "preferredPath", preferredPathDefault)
 
@@ -164,7 +168,8 @@ preferredPath := readIni("updater.ini", "config", "preferredPath", preferredPath
 if (preferredPathForced != "")
   preferredPath := preferredPathForced
   
-preferredPath := preferredPath . targetAppnameLower
+preferredPath := preferredPath . targetAppnameLower . "\"
+
 createRestartBatch()
 
 server := serverURL . targetAppnameLower . serverURLExtension
