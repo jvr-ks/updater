@@ -1,11 +1,14 @@
 # Updater  
 Windows only!  
-Autohotkey-script.  
+Autohotkey version 1 code. 
+  
+"Updater.exe" is used for the installation and subsequent updating of AutoHotkey projects. 
+  
 For use with Github repositories.  
   
 **Hint:** "XXX" -> empty or 64 = 64 bit, 32 = 32 bit  
   
-** Usable but has a few bugs and is old AHK 1 code! ** 
+** Usable but is old AHK 1 code! ** 
   
 #### Latest changes:  
   
@@ -30,16 +33,14 @@ Version (>=)| Change
   
 #### Latest changes description  
 Downloading the target application the only file downloaded is "updater.exe".  
-Running "updater.exe" downloads all other required files.  
-"updater.exe" is "branded to only download the required files of the estinct target application.  
-
-
-
-On the first install of the target application, only the file "updater.exe" is download.  
-The 
-The file "updater.ini" targetAppnameOverride
-
-
+Running "updater.exe" downloads all other required files,  
+defined by the contents of "updaterfiles$_$_$64.txt" or "updaterfiles$_$_$32.txt" in case of a 32bit app.  
+In the rare event that the branding (to the appname name) of "updater.exe" must be overwritten,  
+manually add an additional parameter:  
+"targetAppnameOverride=<new lowercase appname>"  
+to the "updater.ini" file and perhabs change "updaterfiles$_$_$64.txt" or "updaterfiles$_$_$32.txt"  
+accordingly.  
+  
 #### TODO:  
   
 TODO | Done in  
@@ -222,8 +223,8 @@ Copyright (c) 2021 J. v. Roos
   
 <a name="virusscan"></a>  
 ##### Virusscan at Virustotal 
-[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1792155721
+[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1792157217
 )  
-[Virusscan at Virustotal, updater32.exe 32bit-exe, Check here](https://www.virustotal.com/gui/url/c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b/detection/u-c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b-1792155723
+[Virusscan at Virustotal, updater32.exe 32bit-exe, Check here](https://www.virustotal.com/gui/url/c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b/detection/u-c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b-1792157218
 )  
 Use [CTRL] + Click to open in a new window! 
