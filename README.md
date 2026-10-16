@@ -11,6 +11,7 @@ For use with Github repositories.
   
 Version (>=)| Change  
 ------------ | -------------  
+0.054 | targetAppnameOverride
 0.046 | A32 (ANSI) version removed
 0.045 | "updater_default_files*.bat" rename to "__updater_default_files*.bat"
 0.044 | "xcopy"-command replace bei "copy /y /v"
@@ -27,17 +28,31 @@ Version (>=)| Change
 0.012 | Subdirectory support  
 0.004 | Repo "master" changed to "main"  
   
+#### Latest changes description  
+Downloading the target application the only file downloaded is "updater.exe".  
+Running "updater.exe" downloads all other required files.  
+"updater.exe" is "branded to only download the required files of the estinct target application.  
+
+
+
+On the first install of the target application, only the file "updater.exe" is download.  
+The 
+The file "updater.ini" targetAppnameOverride
+
+
 #### TODO:  
   
 TODO | Done in  
 ------------ | -------------  
-center the gui |
+center the gui | 0.051
 Add a CRC check (?)| -  
 Strategy: merge | -   
 Strategy: delete | 0.018  
-Subdirectory support | 0.012  
+Subdirectory support | 0.012 
   
-#### Description:  
+ 
+  
+#### Description  
 **Do not run the Updater inside the updater-repo-directory!**  
 (see below "Copy to target" section)  
   
@@ -207,8 +222,8 @@ Copyright (c) 2021 J. v. Roos
   
 <a name="virusscan"></a>  
 ##### Virusscan at Virustotal 
-[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1792138361
+[Virusscan at Virustotal, updater.exe 64bit-exe, Check here](https://www.virustotal.com/gui/url/9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65/detection/u-9ca6068490d1399cfc37307778b41523c880130032a45202c4558ef373604f65-1792155721
 )  
-[Virusscan at Virustotal, updater32.exe 32bit-exe, Check here](https://www.virustotal.com/gui/url/c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b/detection/u-c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b-1792138363
+[Virusscan at Virustotal, updater32.exe 32bit-exe, Check here](https://www.virustotal.com/gui/url/c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b/detection/u-c2d6e7bff3feb95d149da772a6c6636d3ef0c0293d4a6515f396706ebfe21a5b-1792155723
 )  
 Use [CTRL] + Click to open in a new window! 
