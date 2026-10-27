@@ -125,7 +125,7 @@ Uploader uses url-decoded file/directory-names which leads to pathnames like:
 The REPONAME should be the lowercase appname!  
 I use this code in my make-file "make.bat":  
 ````
-rem create updater-repo branding
+rem create updater repo branding
 echo repoName := "%appname%" > "C:\ ... path to ...\appname\reponame.ahk"  
 ````
 * * **Hint:**  
