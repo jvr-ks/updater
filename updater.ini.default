@@ -1,0 +1,10 @@
+[config]
+font="Calibri"
+fontsize=10
+serverURL="https://github.com/jvr-ks/"
+serverURLExtension="/raw/main/"
+serverUpdaterURL="https://raw.github.com/jvr-ks/"
+serverUpdaterURLExtension="/raw/main/"
+preferredPath=C:\jvrks\
+targetAppnameOverride="None"
+
